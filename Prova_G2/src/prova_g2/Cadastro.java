@@ -21,7 +21,9 @@ public class Cadastro {
 		boolean flag = false;
 		String nome;
 
+		System.out.println("---------------------------------------");
 		System.out.println("BEM VINDO AO PROGRAMA DE CADASTRAMENTO");
+		System.out.println("---------------------------------------");
 
 		do {
 			try {
