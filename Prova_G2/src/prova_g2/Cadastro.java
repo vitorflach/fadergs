@@ -14,148 +14,161 @@ import java.util.Scanner;
  * @author alu201815484
  */
 public class Cadastro {
-    public static void main(String[] args) {
-        Scanner scanf = new Scanner(System.in);
-        ArrayList<Pessoa>pessoas = new ArrayList<>();
-        int menu = 0, opcao, idade;
-        boolean flag = false;
-        String nome;
-        
-        System.out.println("BEM VINDO AO PROGRAMA DE CADASTRAMENTO");
-        
-        do{
-            try{
-            System.out.println("Por favor, selecione a op√ß√£o desejada no Menu abaixo: ");
-            System.out.println("1)Cadastrar Pessoa.");
-            System.out.println("2)Buscar Pessoa.");
-            System.out.println("3)Incrementar idade.");
-            System.out.println("4)Excluir pessoa.");
-            System.out.println("5)Listar pessoas.");
-            System.out.println("6)Listar pessoas de idade X.");
-            System.out.println("7)Sair.");
-            menu = scanf.nextInt();
-            switch(menu){
-                case 1: System.out.println("VOC√ä SELECIONOU: CADASTRAR PESSOA");
-                        do{
-                            System.out.println("Selecione a op√£o de cadastramento ==> \n1)PF\n2)PJ");
-                            opcao = scanf.nextInt();
-                            switch(opcao){
-                                case 1: System.out.println("Digite o Nome e a Idade da Pessoa: ");
-                                        pessoas.add(new PF(scanf.next(), scanf.nextInt()));                                        
-                                    break;
-                                case 2: System.out.println("Digite o Nome e a Idade da Pessoa: ");
-                                        pessoas.add(new PJ(scanf.next(), scanf.nextInt())); 
-                                    break;
-                                default: System.out.println("Op√ß√£o Inv√°lida.");
-                            }
-                        }while(opcao != 1 && opcao != 2);
-                    break;
-                case 2: System.out.println("VOC√ä SELECIONOU: BUSCAR PESSOA");
-                        System.out.println("Digite o nome da pessoa que voc√™ deseja buscar: ");
-                        nome = scanf.next();
-                        for(Pessoa p: pessoas){
-                            if(p.getNome().equals(nome)){
-                                System.out.println("---------------------------------------");
-                                System.out.println("PESSOA ENCONTRADA");
-                                System.out.println("Nome: " + p.getNome());
-                                System.out.println("Idade: " + p.getIdade());
-                                System.out.println("---------------------------------------");
-                                flag = true;
-                            }
-                        }
-                        if(!flag){ 
-                            System.out.println("PESSOA N√ÉO ENCONTRADA"); 
-                            System.out.println("---------------------------------------");
-                            
-                        }
-                        flag = false;
-                    break;
-                case 3: System.out.println("VOC√ä SELECIONOU: INCREMENTAR IDADE");
-                        System.out.println("Digite o nome da pessoa que voc√™ deseja incrementar idade: ");
-                        nome = scanf.next();
-                        for(Pessoa p: pessoas){
-                            
-                            if(p.getNome().equals(nome)){
-                                System.out.println("Pessoa encontrada!");
-                                System.out.println("Idade atual ==> " + p.getIdade());
-                                System.out.println("Quantos anos voc√™ quer incrementar para essa pessoa?");
-                                p.setIdade(scanf.nextInt() + p.getIdade());
-                                System.out.println("---------------------------------------");
-                                System.out.println("Nome: " + p.getNome());                               
-                                System.out.println("NOVA idade: " + p.getIdade());
-                                System.out.println("---------------------------------------");
-                                flag = true;
-                            }                       
-                        }
-                        if(!flag){
-                            System.out.println("PESSOA N√ÉO ENCONTRADA");
-                            System.out.println("---------------------------------------");
-                        }
-                        flag = false;
-                    break;
-                case 4: System.out.println("VOC√ä SELECIONOU: EXCLUIR PESSOA");
-                        System.out.println("Digite o nome da pessoa que voc√™ deseja excluir: ");
-                        nome = scanf.next();
-                        for (Pessoa p: pessoas){
-                           if(p.getNome().equals(nome)){
-                                pessoas.remove(p);
-                                System.out.println("PESSOA ENCONTRADA E REMOVIDA COM SUCESSO!!");
-                                System.out.println("---------------------------------------");
-                                flag = true;
-                                break;
-                           }                      
-                        }
-                       if(!flag){ 
-                           System.out.println("PESSOA N√ÉO ENCONTRADA");
-                           System.out.println("---------------------------------------");
-                           
-                       }
-                       flag = false;
-                    break;
-                case 5: System.out.println("VOC√ä SELECIONOU: LISTAR PESSOAS");
-                        if(pessoas.isEmpty()){
-                            System.out.println("---------------------------------------");
-                            System.out.println("LISTA VAZIA");
-                            System.out.println("---------------------------------------");
-                        }else{
-                            for(Pessoa p: pessoas){                               
-                                System.out.println("Nome: " + p.getNome());
-                                System.out.println("Idade: " + p.getIdade());
-                                System.out.println("---------------------------------------");
-                            }    
-                        }                                      
-                    break;
-                case 6: if(pessoas.isEmpty()){
-                            System.out.println("---------------------------------------");
-                            System.out.println("NENHUMA PESSOA FOI INCREMENTADA NA LISTA");
-                            System.out.println("---------------------------------------");
-                        }else{
-                            System.out.println("VOC√ä SELECIONOU: LISTAR PESSOAS DE IDADE X");
-                            System.out.println("Digite uma idade e o programa ir√° imprimir na tela todas as pessoas que tem essa idade: ");
-                            idade = scanf.nextInt();
-                            for(Pessoa p: pessoas){
-                                if(p.getIdade() == idade){                                   
-                                    System.out.println("---------------------------------------");
-                                    System.out.println("Nome: " +p.getNome());
-                                    System.out.println("---------------------------------------");
-                                    flag = true;
-                                }
-                            }
-                            if(!flag){
-                                System.out.println("NINGU√âM NA LISTA POSSUI ESTA IDADE!");
-                                System.out.println("---------------------------------------");
-                            }
-                            flag = false;
-                        }
-                    break;
-                case 7: System.out.println("PROGRAMA FINALIZADO, AT√â LOGO.");
-                    break;
-                default: System.out.println("Op√ß√£o inv√°lida."); System.out.println("----------------------------------------");
-            }
-        }catch(InputMismatchException e){
-            System.err.println("TIPO DE DADO INV√ÅLIDO");
-            scanf.next();
-        }
-        }while(menu != 7);      
-    }     
+	public static void main(String[] args) {
+		Scanner scanf = new Scanner(System.in);
+		ArrayList<Pessoa> pessoas = new ArrayList<>();
+		int menu = 0, opcao, idade;
+		boolean flag = false;
+		String nome;
+
+		System.out.println("BEM VINDO AO PROGRAMA DE CADASTRAMENTO");
+
+		do {
+			try {
+				System.out.println("Por favor, selecione a opÁ„o desejada no Menu abaixo: ");
+				System.out.println("1)Cadastrar Pessoa.");
+				System.out.println("2)Buscar Pessoa.");
+				System.out.println("3)Incrementar idade.");
+				System.out.println("4)Excluir pessoa.");
+				System.out.println("5)Listar pessoas.");
+				System.out.println("6)Listar pessoas de idade X.");
+				System.out.println("7)Sair.");
+				menu = scanf.nextInt();
+				switch (menu) {
+				case 1:
+					System.out.println("VOC  SELECIONOU: CADASTRAR PESSOA");
+					do {
+						System.out.println("Selecione a opÁ„o de cadastramento ==> \n1)PF\n2)PJ");
+						opcao = scanf.nextInt();
+						switch (opcao) {
+						case 1:
+							System.out.println("Digite o Nome e a Idade da Pessoa: ");
+							pessoas.add(new PF(scanf.next(), scanf.nextInt()));
+							break;
+						case 2:
+							System.out.println("Digite o Nome e a Idade da Pessoa: ");
+							pessoas.add(new PJ(scanf.next(), scanf.nextInt()));
+							break;
+						default:
+							System.out.println("OpÁ„o Inv·lida.");
+						}
+					} while (opcao != 1 && opcao != 2);
+					break;
+				case 2:
+					System.out.println("VOC  SELECIONOU: BUSCAR PESSOA");
+					System.out.println("Digite o nome da pessoa que vocÍ deseja buscar: ");
+					nome = scanf.next();
+					for (Pessoa p : pessoas) {
+						if (p.getNome().equals(nome)) {
+							System.out.println("---------------------------------------");
+							System.out.println("PESSOA ENCONTRADA");
+							System.out.println("Nome: " + p.getNome());
+							System.out.println("Idade: " + p.getIdade());
+							System.out.println("---------------------------------------");
+							flag = true;
+						}
+					}
+					if (!flag) {
+						System.out.println("PESSOA N√O ENCONTRADA");
+						System.out.println("---------------------------------------");
+
+					}
+					flag = false;
+					break;
+				case 3:
+					System.out.println("VOC  SELECIONOU: INCREMENTAR IDADE");
+					System.out.println("Digite o nome da pessoa que vocÍ deseja incrementar idade: ");
+					nome = scanf.next();
+					for (Pessoa p : pessoas) {
+
+						if (p.getNome().equals(nome)) {
+							System.out.println("Pessoa encontrada!");
+							System.out.println("Idade atual ==> " + p.getIdade());
+							System.out.println("Quantos anos vocÍ quer incrementar para essa pessoa?");
+							p.setIdade(scanf.nextInt() + p.getIdade());
+							System.out.println("---------------------------------------");
+							System.out.println("Nome: " + p.getNome());
+							System.out.println("NOVA idade: " + p.getIdade());
+							System.out.println("---------------------------------------");
+							flag = true;
+						}
+					}
+					if (!flag) {
+						System.out.println("PESSOA N√O ENCONTRADA");
+						System.out.println("---------------------------------------");
+					}
+					flag = false;
+					break;
+				case 4:
+					System.out.println("VOC  SELECIONOU: EXCLUIR PESSOA");
+					System.out.println("Digite o nome da pessoa que vocÍ deseja excluir: ");
+					nome = scanf.next();
+					for (Pessoa p : pessoas) {
+						if (p.getNome().equals(nome)) {
+							pessoas.remove(p);
+							System.out.println("PESSOA ENCONTRADA E REMOVIDA COM SUCESSO!!");
+							System.out.println("---------------------------------------");
+							flag = true;
+							break;
+						}
+					}
+					if (!flag) {
+						System.out.println("PESSOA N√O ENCONTRADA");
+						System.out.println("---------------------------------------");
+
+					}
+					flag = false;
+					break;
+				case 5:
+					System.out.println("VOC  SELECIONOU: LISTAR PESSOAS");
+					if (pessoas.isEmpty()) {
+						System.out.println("---------------------------------------");
+						System.out.println("LISTA VAZIA");
+						System.out.println("---------------------------------------");
+					} else {
+						for (Pessoa p : pessoas) {
+							System.out.println("Nome: " + p.getNome());
+							System.out.println("Idade: " + p.getIdade());
+							System.out.println("---------------------------------------");
+						}
+					}
+					break;
+				case 6:
+					if (pessoas.isEmpty()) {
+						System.out.println("---------------------------------------");
+						System.out.println("NENHUMA PESSOA FOI INCREMENTADA NA LISTA");
+						System.out.println("---------------------------------------");
+					} else {
+						System.out.println("VOC  SELECIONOU: LISTAR PESSOAS DE IDADE X");
+						System.out.println(
+								"Digite uma idade e o programa ir· imprimir na tela todas as pessoas que tem essa idade: ");
+						idade = scanf.nextInt();
+						for (Pessoa p : pessoas) {
+							if (p.getIdade() == idade) {
+								System.out.println("---------------------------------------");
+								System.out.println("Nome: " + p.getNome());
+								System.out.println("---------------------------------------");
+								flag = true;
+							}
+						}
+						if (!flag) {
+							System.out.println("NINGU…M NA LISTA POSSUI ESTA IDADE!");
+							System.out.println("---------------------------------------");
+						}
+						flag = false;
+					}
+					break;
+				case 7:
+					System.out.println("PROGRAMA FINALIZADO, AT… LOGO.");
+					break;
+				default:
+					System.out.println("OpÁ„o inv·lida.");
+					System.out.println("----------------------------------------");
+				}
+			} catch (InputMismatchException e) {
+				System.err.println("TIPO DE DADO INV¡LIDO");
+				scanf.next();
+			}
+		} while (menu != 7);
+	}
 }
